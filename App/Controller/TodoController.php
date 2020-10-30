@@ -56,8 +56,20 @@ class TodoController
 
     public function delete(int $id)
     {
+        // Récupère l'enregistrement demandé en base de données
         $todo = Todo::findById($id);
 
+        // Récupère tous les enregistrements dont le rang est supérieur à celui de l'objet à supprimer
+        $todosToUpdate = Todo::findWhereRankAbove($todo->getRank());
+        // Pour chaque objet
+        foreach ($todosToUpdate as $todoToUpdate) {
+            // Retire 1 du rang de l'objet
+            $todoToUpdate->setRank($todoToUpdate->getRank() - 1);
+            // Enregistre l'objet en base de données
+            $todoToUpdate->update();
+        }
+
+        // Supprime l'enregistrement demandé de la base de données
         $todo->delete();
 
         // Redirige sur la liste des tâches

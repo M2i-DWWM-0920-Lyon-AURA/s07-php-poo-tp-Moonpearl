@@ -43,6 +43,16 @@ class Todo
         return $statement->fetchAll(PDO::FETCH_FUNC, [static::class, 'createInstance'])[0];
     }
 
+    static public function findWhereRankAbove(int $rank)
+    {
+        // Réutilise l'instance de base de données définie globalement
+        global $databaseHandler;
+
+        $statement = $databaseHandler->prepare('SELECT * FROM `todos` WHERE `rank` > :rank');
+        $statement->execute([ ':rank' => $rank ]);
+        return $statement->fetchAll(PDO::FETCH_FUNC, [static::class, 'createInstance']);
+    }
+
     static public function countAll(): int
     {
         // Réutilise l'instance de base de données définie globalement
