@@ -36,6 +36,12 @@ $router->map('GET', '/todos', function() {
 	$controller->list();
 });
 
+// Ajouter une nouvelle tâche
+$router->map('POST', '/todos/new', function() {
+	$controller = new TodoController;
+	$controller->create();
+});
+
 
 // ================================================================
 // Routeur

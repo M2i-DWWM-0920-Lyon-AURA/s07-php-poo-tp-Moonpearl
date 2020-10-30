@@ -17,7 +17,7 @@
     <?php endforeach; ?>
 
 </ul>
-<form id="add-todo" class="d-flex">
-    <input id="add-todo-name" name="" class="form-control" type="text" placeholder="Entrez une nouvelle tâche" />
+<form id="add-todo" class="d-flex" method="post" action="/todos/new">
+    <input id="add-todo-name" name="description" class="form-control" type="text" placeholder="Entrez une nouvelle tâche" />
     <button id="add-todo-button" class="btn btn-success">Ajouter</button>
 </form>
