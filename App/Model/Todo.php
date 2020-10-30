@@ -91,12 +91,14 @@ class Todo
             UPDATE `todos`
             SET
                 `description` = :description,
-                `rank` = :rank
+                `rank` = :rank,
+                `done` = CAST( :done as UNSIGNED )
             WHERE `id` = :id
         ');
         $statement->execute([
             ':description' => $this->description,
             ':rank' => $this->rank,
+            ':done' => $this->done,
             ':id' => $this->id
         ]);
 

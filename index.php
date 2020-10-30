@@ -19,6 +19,7 @@ $router = new AltoRouter();
 
 // Crée une nouvelle interface de base de données
 $databaseHandler = new PDO('mysql:host=localhost;dbname=php-todos', 'root', 'root');
+$databaseHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 // ================================================================

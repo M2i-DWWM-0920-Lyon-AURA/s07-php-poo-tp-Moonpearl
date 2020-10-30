@@ -48,6 +48,12 @@ class TodoController
             $todo->setRank($_POST['rank']);
         }
 
+        // Si le formulaire contient un état termine/non terminé
+        if (isset($_POST['done'])) {
+            // Modifie le rang de l'enregistrement existant
+            $todo->setDone($_POST['done']);
+        }
+
         $todo->update();
 
         // Redirige sur la liste des tâches
