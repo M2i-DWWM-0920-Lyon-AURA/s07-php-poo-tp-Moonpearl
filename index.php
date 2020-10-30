@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Todo;
 use App\Controller\MainController;
 use App\Controller\TodoController;
 
@@ -15,6 +16,9 @@ require 'vendor/autoload.php';
 
 // Crée un nouveau routeur
 $router = new AltoRouter();
+
+// Crée une nouvelle interface de base de données
+$databaseHandler = new PDO('mysql:host=localhost;dbname=php-todos', 'root', 'root');
 
 
 // ================================================================

@@ -5,14 +5,14 @@
     <?php foreach ($todos as $todo): ?>
     <li class="list-group-item d-flex">
 
-        <form method="post" action="/todos/<?= $todo['id'] ?>/update" class="d-flex" style="flex-grow: 2">
-            <input name="description" type="text" value="<?= $todo['description'] ?>" class="form-control" />
+        <form method="post" action="/todos/<?= $todo->getId() ?>/update" class="d-flex" style="flex-grow: 2">
+            <input name="description" type="text" value="<?= $todo->getDescription() ?>" class="form-control" />
             <button type="submit" class="btn btn-success">
                 <i class="fas fa-check"></i>
             </button>
         </form>
         
-        <form method="post" action="/todos/<?= $todo['id'] ?>/delete">
+        <form method="post" action="/todos/<?= $todo->getId() ?>/delete">
             <button type="submit" class="btn btn-outline-danger">
                 <i class="fas fa-trash-alt"></i>
             </button>
