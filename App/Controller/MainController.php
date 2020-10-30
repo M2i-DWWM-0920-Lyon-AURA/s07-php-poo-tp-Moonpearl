@@ -6,6 +6,9 @@ class MainController
 {
     public function home()
     {
-        require './pages/home.php';
+        // Inclue les templates nécessaires à l'affichage de la page d'accueil
+        require './templates/head.php';
+        require './templates/home.php';
+        require './templates/foot.php';
     }
 }
