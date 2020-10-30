@@ -3,12 +3,18 @@
 <ul id="todo-list" class="list-group mb-4">
 
     <?php foreach ($todos as $todo): ?>
-    <li class="list-group-item">
+    <li class="list-group-item d-flex">
 
-        <form method="post" action="/todos/<?= $todo['id'] ?>/update" class="d-flex">
+        <form method="post" action="/todos/<?= $todo['id'] ?>/update" class="d-flex" style="flex-grow: 2">
             <input name="description" type="text" value="<?= $todo['description'] ?>" class="form-control" />
-            <button class="btn btn-success">
+            <button type="submit" class="btn btn-success">
                 <i class="fas fa-check"></i>
+            </button>
+        </form>
+        
+        <form method="post" action="/todos/<?= $todo['id'] ?>/delete">
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fas fa-trash-alt"></i>
             </button>
         </form>
 

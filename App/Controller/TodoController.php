@@ -85,4 +85,15 @@ class TodoController
         // Redirige sur la liste des tâches
         header('Location: /todos');
     }
+
+    public function delete(int $id)
+    {
+        // Crée une nouvelle interface avec la base de données
+        $databaseHandler = new PDO('mysql:host=localhost;dbname=php-todos', 'root', 'root');
+        $statement = $databaseHandler->prepare('DELETE FROM `todos` WHERE `id` = :id');
+        $statement->execute([ ':id' => $id ]);
+
+        // Redirige sur la liste des tâches
+        header('Location: /todos');
+    }
 }

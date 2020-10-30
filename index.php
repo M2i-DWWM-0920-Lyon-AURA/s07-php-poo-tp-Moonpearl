@@ -48,6 +48,12 @@ $router->map('POST', '/todos/[i:id]/update', function(int $id) {
 	$controller->update($id);
 });
 
+// Supprime une tâche existante
+$router->map('POST', '/todos/[i:id]/delete', function(int $id) {
+	$controller = new TodoController;
+	$controller->delete($id);
+});
+
 
 // ================================================================
 // Routeur
