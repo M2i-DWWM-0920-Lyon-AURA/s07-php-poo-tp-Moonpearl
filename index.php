@@ -1,5 +1,8 @@
 <?php
 
+use App\Controller\MainController;
+use App\Controller\TodoController;
+
 // ================================================================
 // Front controller
 // ----------------------------------------------------------------
@@ -23,12 +26,14 @@ $router = new AltoRouter();
 
 // Page d'accueil
 $router->map('GET', '/', function() {
-    require __DIR__ . '/pages/home.php';
+	$controller = new MainController;
+	$controller->home();
 });
 
 // Page des tâches à faire
 $router->map('GET', '/todos', function() {
-    require __DIR__ . '/pages/todo.php';
+	$controller = new TodoController;
+	$controller->list();
 });
 
 
