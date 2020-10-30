@@ -42,6 +42,12 @@ $router->map('POST', '/todos/new', function() {
 	$controller->create();
 });
 
+// Modifier une tâche existante
+$router->map('POST', '/todos/[i:id]/update', function(int $id) {
+	$controller = new TodoController;
+	$controller->update($id);
+});
+
 
 // ================================================================
 // Routeur

@@ -42,7 +42,47 @@ class TodoController
             ':rank' => $rank,
         ]);
 
-        // Rediriger sur la liste des tâches
+        // Redirige sur la liste des tâches
+        header('Location: /todos');
+    }
+
+    public function update(int $id)
+    {
+        // Crée une nouvelle interface avec la base de données
+        $databaseHandler = new PDO('mysql:host=localhost;dbname=php-todos', 'root', 'root');
+        $databaseHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Récupère l'enregistrement déjà existant
+        $statement = $databaseHandler->prepare('SELECT * FROM `todos` WHERE `id` = :id');
+        $statement->execute([ ':id' => $id ]);
+        $todo = $statement->fetchAll()[0];
+
+        // Si le formulaire contient une description
+        if (isset($_POST['description'])) {
+            // Modifie la description de l'enregistrement existant
+            $todo['description'] = $_POST['description'];
+        }
+        
+        // Si le formulaire contient un rang
+        if (isset($_POST['rank'])) {
+            // Modifie le rang de l'enregistrement existant
+            $todo['rank'] = $_POST['rank'];
+        }
+
+        // Crée une requête pour modifier l'enregistrement existant en base de données
+        $statement = $databaseHandler->prepare('
+            UPDATE `todos`
+            SET
+                `description` = :description,
+                `rank` = :rank
+            WHERE `id` = :id
+        ');
+        $statement->execute([
+            ':description' => $todo['description'],
+            ':rank' => $todo['rank'],
+            ':id' => $id
+        ]);
+
+        // Redirige sur la liste des tâches
         header('Location: /todos');
     }
 }

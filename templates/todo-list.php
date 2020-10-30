@@ -5,13 +5,12 @@
     <?php foreach ($todos as $todo): ?>
     <li class="list-group-item">
 
-        <?php if($todo['done']): ?>
-            <del class="text-muted">
-                <?= $todo['description'] ?>
-            </del>
-        <?php else: ?>
-            <?= $todo['description'] ?>
-        <?php endif; ?>
+        <form method="post" action="/todos/<?= $todo['id'] ?>/update" class="d-flex">
+            <input name="description" type="text" value="<?= $todo['description'] ?>" class="form-control" />
+            <button class="btn btn-success">
+                <i class="fas fa-check"></i>
+            </button>
+        </form>
 
     </li>
     <?php endforeach; ?>
