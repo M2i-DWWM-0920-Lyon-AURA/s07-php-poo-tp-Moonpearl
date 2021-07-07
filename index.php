@@ -1,5 +1,9 @@
 <?php
 
+use App\Model\Todo;
+use App\Controller\MainController;
+use App\Controller\TodoController;
+
 // ================================================================
 // Front controller
 // ----------------------------------------------------------------
@@ -13,6 +17,10 @@ require 'vendor/autoload.php';
 // Crée un nouveau routeur
 $router = new AltoRouter();
 
+// Crée une nouvelle interface de base de données
+$databaseHandler = new PDO('mysql:host=localhost;dbname=php-todos', 'root', 'root');
+$databaseHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
 // ================================================================
 // Routes
@@ -23,12 +31,32 @@ $router = new AltoRouter();
 
 // Page d'accueil
 $router->map('GET', '/', function() {
-    require __DIR__ . '/pages/home.php';
+	$controller = new MainController;
+	$controller->home();
 });
 
 // Page des tâches à faire
 $router->map('GET', '/todos', function() {
-    require __DIR__ . '/pages/todo.php';
+	$controller = new TodoController;
+	$controller->list();
+});
+
+// Ajouter une nouvelle tâche
+$router->map('POST', '/todos/new', function() {
+	$controller = new TodoController;
+	$controller->create();
+});
+
+// Modifier une tâche existante
+$router->map('POST', '/todos/[i:id]/update', function(int $id) {
+	$controller = new TodoController;
+	$controller->update($id);
+});
+
+// Supprime une tâche existante
+$router->map('POST', '/todos/[i:id]/delete', function(int $id) {
+	$controller = new TodoController;
+	$controller->delete($id);
 });
 
 
